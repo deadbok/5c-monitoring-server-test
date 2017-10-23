@@ -1,0 +1,6 @@
+[submodule "roles/ansible-librenms"]
+	path = roles/ansible-librenms
+	url = https://github.com/deadbok/ansible-librenms
+[submodule "roles/ansible-integrated-elks"]
+	path = roles/ansible-integrated-elks
+	url = https://github.com/deadbok/ansible-integrated-elks
