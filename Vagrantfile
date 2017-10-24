@@ -40,8 +40,15 @@ Vagrant.configure("2") do |config|
     config.vm.define :desktop_vm do |desktop_vm|
         desktop_vm.vm.hostname = "desktop-vm"
         desktop_vm.vm.network "private_network", ip: "192.168.50.14"
+        desktop_vm.vm.network :forwarded_port, guest: 22, host: 2254, id: 'ssh'
         desktop_vm.vm.box = "xnerv/desktop-debian-8-amd64.box"
         desktop_vm.vm.box_version = "1.0.0"
+
+        desktop_vm.vm.provider "virtualbox" do |vb|
+            vb.name = "desktop_vm"
+            vb.cpus = 1
+            vb.memory = 1024
+        end
     end
 
     #config.vm.provision :ansible do |ansible|
