@@ -5,7 +5,15 @@
     - role: ansible-librenms
 
 - hosts: clients
+  roles:
+    - role: rsyslog-debian
   tasks:
+    - name: Update all packages to the latest version
+      apt:
+        update_cache: yes
+        upgrade: dist
+      become: yes
+
     - name: Install tools.
       apt:
         name: "{{ item }}"

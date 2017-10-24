@@ -1,0 +1,14 @@
+- name: Install new rsyslog.conf
+  template:
+    src: rsyslog.conf.j2
+    dest: /etc/rsyslog.conf
+  become: true
+  notify:
+    - restart rsyslog
+
+- name: Make sure rsyslog is enabled.
+  systemd:
+    name: rsyslog
+    enabled: yes
+    state: started
+  become: true
