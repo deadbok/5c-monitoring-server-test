@@ -7,6 +7,7 @@ Host are defined and grouped in `hosts`, the directories `group_vars` and
 
  * *monitor*: Variables for the monitoring server.
      * Set IP addresses for externally accessible services.
+     * Set network on which LibreNMS does autodiscovery.
  * *vagrant*: Variables for all Vagrant VMs.
      * Set up SSH connection details for Vagrant VMs.
  * *all.yml*: Variables that applies to all groups.

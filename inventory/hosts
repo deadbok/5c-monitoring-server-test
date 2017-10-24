@@ -9,3 +9,6 @@ desktop-vm
 [vagrant:children]
 monitor
 clients
+
+[snmp:children]
+clients

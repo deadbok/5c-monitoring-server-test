@@ -6,6 +6,7 @@
 
 - hosts: clients
   roles:
+    - role: snmp-debian
     - role: rsyslog-debian
   tasks:
     - name: Update all packages to the latest version

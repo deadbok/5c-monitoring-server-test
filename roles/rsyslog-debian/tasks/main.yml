@@ -2,7 +2,7 @@
   template:
     src: rsyslog.conf.j2
     dest: /etc/rsyslog.conf
-  become: true
+  become: yes
   notify:
     - restart rsyslog
 
@@ -11,4 +11,4 @@
     name: rsyslog
     enabled: yes
     state: started
-  become: true
+  become: yes
