@@ -1,0 +1,2 @@
+elastic_backend_external_ip: "192.168.50.11"
+remote_rsyslog_udp_port: 10514
