@@ -1,0 +1,20 @@
+---
+- hosts: monitor
+  roles:
+    - role: ansible-integrated-elks
+    - role: ansible-librenms
+
+- hosts: clients
+  tasks:
+    - name: Install tools.
+      apt:
+        name: "{{ item }}"
+        state: latest
+      become: yes
+      with_items:
+        - git
+        - logrotate
+        - mc
+        - nano
+        - htop
+...
