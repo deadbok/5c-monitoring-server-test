@@ -3,11 +3,32 @@
 Host are defined and grouped in `hosts`, the directories `group_vars` and
 `host_vars` contains variable definitions for specific groups and hosts.
 
+## Hosts and groups
+
+### Groups
+
+    * *monitor*: Every host that should act as a monitoring server.
+    * *clients*: Every host not a monitoring server.
+    * *vagrant*: Every host that has been created by vagrant.
+    * *snmp*: Every host that uses SNMP (including the monitoring server)
+    * *snmpd*: Every host that is supposed to run SNMPd for communicating
+      with the monitoring server.
+
+### Hosts
+
+ * *monitor-vm*: Monitoring server.
+ * *dummy-vm*: Unused example machine.
+ * *dummier-vm*: Unused example machine.
+ * *desktop-vm*: Desktop machine to access the monitoring server.
+
 ## Group variables
 
  * *monitor*: Variables for the monitoring server.
      * Set IP addresses for externally accessible services.
      * Set network on which LibreNMS does autodiscovery.
+ * *snmp*: Variables for SNMP used by both clients and the monitoring server.
+     * Set SNMP community string.
+     * Set SNMP admin user info and location.
  * *vagrant*: Variables for all Vagrant VMs.
      * Set up SSH connection details for Vagrant VMs.
  * *all.yml*: Variables that applies to all groups.

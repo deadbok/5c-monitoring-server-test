@@ -13,8 +13,17 @@ Vagrantfile, will have to be manually carried over to the inventory.
 ## Usage
 
 Install the [Vagrant host updater](https://github.com/cogitatio/vagrant-hostsupdater)
-plugin. Then run the below commands to make Vagrant bring up the VM and Ansible
-run the playbook to deploy to them using the inventory in `inventory/hosts`.
+plugin and the [Vagrant host manager](https://github.com/devopsgroup-io/vagrant-hostmanager).
+
+    vagrant plugin install vagrant-hostsupdater
+    vagrant plugin install vagrant-hostmanager
+
+Run Vagrant to create the virtual machines.
+
+    vagrant up
+
+Run the Ansible play book using the inventory in `inventory/hosts` to deploy the
+test machines.
 
     vagrant up
     ansible-playbook -i inventory/hosts playbook.yml
@@ -23,8 +32,8 @@ After this is done, the simplest way to access the monitoring server is through
 the `desktop_vm` machine in Virtual Box. The monitoring services are accessible
 at the following URLs:
 
- * `http://192.168.50.11`: LibreNMS (user: *admin*, password: *changeme*)
- * `http://192.168.50.11:56021`: Kibana.
+ * `http://[fd80:0:3::11]`: LibreNMS (user: *admin*, password: *changeme*)
+ * `http://[fd80:0:3::11]:5601`: Kibana.
 
 ## Files
 
@@ -49,4 +58,19 @@ at the following URLs:
   * *halt.sh*: Shut down the machines.
   * *playbook.yml*: Main Ansible playbook.
   * *Vagrantfile*: Vagrant file to create the test VMs.
-''
+
+## The play book
+
+The play book tasks:
+
+    * Deploy a monitoring server to every host in the monitor group.
+    * Set up snmpd on all hosts in the snmpd group.
+    * Set up rsyslog for sending to the monitoring server on all hosts in the
+      clients group.
+    * Set up some tools on the hosts in the clients group.
+
+## Outstanding issues
+
+ * The rsyslog -> logstash pipeline needs attention
+ * LibreNMS autodiscovery needs attention
+ * Kibana login.

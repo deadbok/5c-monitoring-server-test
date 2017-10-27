@@ -9,7 +9,7 @@ Configure rsyslog to send logs to the Elastic stack back end.
 
 # Variables
 
- * `elastic_backend_ip` - IP address where Logstash listens for rsyslog connections.
+ * `elastic_backend_external_host` - IP address where Logstash listens for rsyslog connections.
    * Default: 127.0.0.1
  * `rsyslog_udp_port` - Port to use for rsyslog UDP connections.
    * Default: 514

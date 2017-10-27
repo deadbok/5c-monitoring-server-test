@@ -12,3 +12,6 @@ clients
 
 [snmp:children]
 clients
+monitor
+
+[snmpd:children]

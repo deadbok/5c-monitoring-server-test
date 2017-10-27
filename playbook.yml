@@ -4,9 +4,25 @@
     - role: ansible-integrated-elks
     - role: ansible-librenms
 
+# The Desktop for some reason has IPv6 disabled on eth1.
+- hosts: desktop-vm
+  tasks:
+    - name: Enable IPv6.
+      sysctl:
+        name: net.ipv6.conf.eth1.disable_ipv6
+        value: 0
+        state: present
+      become: yes
+    - name: Bring up eth1
+      shell: "ifup eth1"
+      become: yes
+
+- hosts: snmpd
+  roles:
+    - role: snmpd-debian
+
 - hosts: clients
   roles:
-    - role: snmp-debian
     - role: rsyslog-debian
   tasks:
     - name: Update all packages to the latest version
