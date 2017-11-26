@@ -1,0 +1,12 @@
+- name: Check if {{ item }} exists
+  shell: "echo select hostname from devices | mysql -ulibrenms -p{{ librenms_db_pass }} librenms | grep {{ item }}"
+  changed_when: False
+  register: librenms_host_exists
+  ignore_errors: True
+
+
+- name: Add {{ item }} to monitored devices
+  shell: "php addhost.php {{ item }} {{ snmp_community }} v2c udp6"
+  args:
+    chdir: "{{librenms_dir}}"
+  when: "librenms_host_exists.rc == 1"

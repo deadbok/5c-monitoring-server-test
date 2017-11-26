@@ -1,0 +1,13 @@
+- name: test
+  debug:
+    msg: "{{ item }}"
+  with_items:
+    - "{{ groups['librenms-hosts'] }}"
+  tags:
+    - librenms-addhosts
+
+- include: addhost.yml
+  with_items:
+    - "{{ groups['librenms-hosts'] }}"
+  tags:
+    - librenms-addhosts
