@@ -1,11 +1,22 @@
 ---
+- hosts: all
+  remote_user: "{{ default_user }}"
+  vars:
+      debian_timezone: "{{ timezone }}"
+  roles:
+    - role: timezone-debian
+    - role: ntp-debian
+
 - hosts: monitor
+  remote_user: "{{ default_user }}"
   roles:
     - role: ansible-integrated-elks
     - role: ansible-librenms
+    - role: ansible-librenms-addhosts6
 
 # The Desktop for some reason has IPv6 disabled on eth1.
 - hosts: desktop-vm
+  remote_user: "{{ default_user }}"
   tasks:
     - name: Enable IPv6.
       sysctl:
@@ -17,11 +28,13 @@
       shell: "ifup eth1"
       become: yes
 
-- hosts: snmpd
+- hosts: snmp
+  remote_user: "{{ default_user }}"
   roles:
     - role: snmpd-debian
 
 - hosts: clients
+  remote_user: "{{ default_user }}"
   roles:
     - role: rsyslog-debian
   tasks:
@@ -42,4 +55,5 @@
         - mc
         - nano
         - htop
+
 ...

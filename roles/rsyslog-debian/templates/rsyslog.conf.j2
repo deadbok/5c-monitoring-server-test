@@ -13,8 +13,8 @@ $ModLoad imklog   # provides kernel logging support
 #$ModLoad immark  # provides --MARK-- message capability
 
 # provides UDP syslog reception
-$ModLoad imudp
-$UDPServerRun {{ rsyslog_udp_port }}
+#$ModLoad imudp
+#$UDPServerRun {{ rsyslog_udp_port }}
 
 # provides TCP syslog reception
 #$ModLoad imtcp
@@ -24,6 +24,8 @@ $UDPServerRun {{ rsyslog_udp_port }}
 ###########################
 #### GLOBAL DIRECTIVES ####
 ###########################
+
+$PreserveFQDN on
 
 #
 # Use traditional timestamp format.

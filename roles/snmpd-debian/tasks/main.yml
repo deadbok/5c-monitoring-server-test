@@ -3,12 +3,16 @@
     src: sources.list.j2
     dest: /etc/apt/sources.list
   become: yes
+  tags:
+    - snmpd
 
 - name: Update all packages to the latest version
   apt:
     update_cache: yes
     upgrade: dist
   become: true
+  tags:
+    - snmpd
 
 - name: Install dependencies
   apt:
@@ -19,6 +23,8 @@
     - snmp
     - snmpd
     - snmp-mibs-downloader
+  tags:
+    - snmpd
 
 - name: Create SNMPd configuration
   template:
@@ -27,6 +33,8 @@
   notify:
     - restart snmpd service
   become: yes
+  tags:
+    - snmpd
 
 - name: Download distribution detection script
   get_url:
@@ -36,3 +44,6 @@
   become: yes
   notify:
     - restart snmpd service
+  tags:
+    - snmpd
+    

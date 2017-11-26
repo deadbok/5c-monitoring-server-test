@@ -1,3 +1,3 @@
 #!/bin/sh
 
-vagrant up && ansible-playbook -i inventory/hosts playbook.yml
+vagrant up && ansible-playbook -vv -i inventory/hosts playbook.yml

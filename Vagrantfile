@@ -6,6 +6,10 @@ Vagrant.configure("2") do |config|
     config.hostmanager.ignore_private_ip = false
     config.hostmanager.include_offline = true
 
+    # Disable synced folders, to not have the Debian default install to not enter
+    # an endless recursive dive starting from the symlink in test.
+    config.vm.synced_folder ".", "/vagrant", disabled: true
+
     config.vm.define :monitor_vm do |monitor_vm|
         monitor_vm.vm.hostname = "monitor-vm"
         #monitor_vm.vm.network "private_network", ip: "192.168.50.11"
@@ -58,6 +62,13 @@ Vagrant.configure("2") do |config|
             vb.cpus = 1
             vb.memory = 1024
         end
+    end
+
+    config.vm.provision :shell do |s|
+        ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+        s.inline = <<-SHELL
+            echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+        SHELL
     end
 
     #config.vm.provision :ansible do |ansible|

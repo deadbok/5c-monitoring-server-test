@@ -1,2 +1,4 @@
 elastic_backend_external_host: "monitor-vm"
-remote_rsyslog_udp_port: 10514
+remote_rsyslog_udp_port: 514
+timezone: Europe/Copenhagen
+snmp_server: "fd80:0:3::11"
